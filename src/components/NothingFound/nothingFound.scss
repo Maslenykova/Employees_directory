@@ -1,0 +1,14 @@
+.searchError {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__title {
+    font-size: 20px;
+  }
+  &__text {
+    font-size: 18px;
+    opacity: 60px;
+  }
+}

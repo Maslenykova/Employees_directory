@@ -1,0 +1,37 @@
+.employee-card {
+  display: flex;
+  flex-direction: column;
+
+  &__avatar {
+    border-radius: 50%;
+  }
+
+  &__content {
+    display: flex; //
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(231, 230, 230);
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.employee-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.fa-solid,
+.fa-regular {
+  padding-right: 15px;
+}
