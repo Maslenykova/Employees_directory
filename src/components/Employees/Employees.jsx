@@ -1,15 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import './employees.scss';
 import { Link } from 'react-router-dom';
+import NothingFound from '../NothingFound/NothingFound';
 
-const EmployeesList = ({ employees }) => {
-  const [isHeadOpen, setIsHeadOpen] = useState(true);
-  const openEmployees = () => setIsHeadOpen(false);
+const EmployeesList = ({ employees, searchQuery, sortType }) => {
+  const [searchParams] = useSearchParams();
+
+  const positionFilter = searchParams.get('position');
+
+  const positionFilteredEmployees = positionFilter
+    ? employees.filter(emp => emp.position.toLowerCase() === positionFilter.toLowerCase())
+    : employees;
+
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+
+  const searchFilteredEmployees = normalizedQuery
+    ? positionFilteredEmployees.filter(
+        emp =>
+          emp.name.toLowerCase().includes(normalizedQuery) ||
+          emp.tag.toLowerCase().includes(normalizedQuery) ||
+          emp.email.toLowerCase().includes(normalizedQuery),
+      )
+    : positionFilteredEmployees;
+
+  if (searchFilteredEmployees.length === 0) {
+    return <NothingFound />;
+  }
+  const sortedEmployees = [...searchFilteredEmployees].sort((a, b) => {
+    if (sortType === 'alphabet') {
+      return a.name.localeCompare(b.name);
+    }
+    if (sortType === 'birthdate') {
+      return new Date(a.birthDate) - new Date(b.birthDate);
+    }
+    return 0;
+  });
 
   return (
     <div className="content">
-      {employees.map(employee => (
-        <div className="employees" key={employee.id}>
+      {sortedEmployees.map(employee => (
+        <li className="employees" key={employee.id}>
           <img className="employees__avatar" src={employee.avatar} alt={employee.name} />
           <div className="employees__info">
             <div className="employees__info_name">{employee.name}</div>
@@ -18,50 +49,10 @@ const EmployeesList = ({ employees }) => {
           <Link to={`/employee/${employee.id}`} className="employees__tag">
             {employee.tag}
           </Link>
-        </div>
+        </li>
       ))}
     </div>
   );
 };
 
 export default EmployeesList;
-
-// const Employees = ({avatar, name, position, tag, email, birthDate, phone, id}) => {
-
-//   const [isWorkerOpen, setIsWorkerOpen] = useState(false);
-
-//   const openWorkerCard = (e) => {
-//     e.preventDefault();
-//     setIsWorkerOpen(true);
-//   };
-
-//   const closeWorkerCard = () => setIsWorkerOpen(false);
-
-//       return (
-//         <div className="employees">
-//            <img src={avatar} alt={name} className="employees__avatar" />
-//            <div className='employees__info'>
-//              <div className='employees__info_name'>{name}</div>
-//            <div className='employees__info_position'>{position}</div>
-
-//            </div>
-//            <a href="#" className="employees__tag" onClick={openWorkerCard}>
-//         {tag}
-//       </a>
-
-//       {isWorkerOpen && (
-//         <EmployeePage
-//           onClose={closeWorkerCard}
-//           avatar={avatar}
-//           name={name}
-//           position={position}
-//           email={email}
-//           birthDate={birthDate}
-//           phone={phone}
-//         />
-//       )}
-//         </div>
-//       );
-//     }
-
-//   export default Employees;

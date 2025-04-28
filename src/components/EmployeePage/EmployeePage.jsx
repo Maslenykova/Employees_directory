@@ -15,15 +15,6 @@ const EmployeePage = () => {
     });
   }, [id]);
 
-  // useEffect(() => {
-  //   fetchEmployeesList().then(data => {
-  //     setTimeout(() => {
-  //       const found = data.find(emp => String(emp.id) === String(id));
-  //       setEmployee(found);
-  //     }, 1000);
-  //   });
-  // }, [id]);
-
   if (!employee)
     return (
       <div className="employee-loading">
@@ -31,27 +22,48 @@ const EmployeePage = () => {
       </div>
     );
 
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const dob = new Date(employee.birthDate);
+  const dobnow = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
+
+  let age = today.getFullYear() - dob.getFullYear();
+
+  if (today < dobnow) {
+    age = age - 1;
+  }
+
   return (
     <div className="employee-card">
       <div className="employee-card__content">
         <img className="employee-card__avatar" src={employee.avatar} alt={employee.name} />
-        <h2>{employee.name}</h2>
+        <h2>
+          {employee.name}
+          {/* {employee.tag} */}
+        </h2>
         <p>{employee.position}</p>
       </div>
 
       <div className="employee-card__info">
-        <i class="fa-solid fa-phone"></i>
-        <p>{employee.phone}</p>
-      </div>
-      <div className="employee-card__info">
-        <i class="fa-regular fa-star"></i>
-        <p>
-          {new Date(employee.birthDate).toLocaleDateString('ru-RU', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric',
-          })}
-        </p>
+        <div className="employee-card__info_birth">
+          <div className="birth-date">
+            <i class="fa-regular fa-star" />
+            {new Date(employee.birthDate).toLocaleDateString('ru-RU', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })}{' '}
+          </div>
+          <div className="employee-card__info_age">{age} лет</div>
+        </div>
+
+        <div className="employee-card__info_phone">
+          <i class="fa-solid fa-phone" /> {employee.phone}
+        </div>
+
+        <div className="employee-card__info_email">
+          <i class="fa-solid fa-envelope" /> {employee.email}
+        </div>
       </div>
     </div>
   );
