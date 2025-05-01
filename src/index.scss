@@ -2,14 +2,21 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  overflow-y: hidden;
-  overflow-y: scroll;
-  width: 1300px;
+html {
+  font-size: 16px;
+  font-family: Inter, sans-serif;
+  color: #050510;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 1400px;
   min-height: 100vh;
-  margin-right: 15px;
-  margin-left: 15px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
 @media screen and (max-width: 900px) {

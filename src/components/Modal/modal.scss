@@ -18,12 +18,10 @@
   width: 400px;
   max-width: 90%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
 
-.modal__title {
-  font-size: 24px;
-  margin-bottom: 20px;
-  text-align: center;
+  &__title {
+    font-size: 24px;
+  }
 }
 
 .modal label {
@@ -37,7 +35,8 @@
 }
 
 .modal__close {
-  margin-left: 150px;
+  margin-left: 340px;
+  padding-bottom: 30px;
   transform: rotate(45deg) scale(2);
   outline: none;
   border: none;

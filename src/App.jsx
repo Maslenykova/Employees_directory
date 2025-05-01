@@ -20,14 +20,14 @@ const App = ({ employeesList, getEmployeesList }) => {
         <Route
           path="/"
           element={
-            <>
+            <div className="main">
               <Navigation onSearch={setSearchQuery} onSortTypeChange={setSortType} />
               <EmployeesList
                 employees={employeesList}
                 searchQuery={searchQuery}
                 sortType={sortType}
               />
-            </>
+            </div>
           }
         />
         <Route

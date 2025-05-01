@@ -7,16 +7,16 @@ const Modal = ({ onSelect, onClose }) => {
   const handleChange = event => {
     const selectedValue = event.target.value;
     setSelectedSort(selectedValue);
-    onSelect(selectedValue); // Передаем выбранный сорт по алфавиту или дню рождения
+    onSelect(selectedValue);
   };
 
   return (
     <div className="modal-overlay">
       <div className="modal" onClick={e => e.stopPropagation()}>
-        <span className="modal__title">Сортировка</span>
         <button className="modal__close" onClick={onClose}>
           +
         </button>
+        <div className="modal__title">Сортировка</div>
         <label>
           <input
             type="radio"
