@@ -1,7 +1,7 @@
 
 ## Project: Employees_directory (JS edition)
 
-#### [Site Link]( https://employees-website.netlify.app)
+#### [Site Link]( https://employees-maslenykova-svetlana.netlify.app)
 
 
 ### The tech stack is:
