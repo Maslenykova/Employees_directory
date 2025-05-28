@@ -37,10 +37,7 @@ const EmployeePage = () => {
     <div className="employee-card">
       <div className="employee-card__content">
         <img className="employee-card__avatar" src={employee.avatar} alt={employee.name} />
-        <h2>
-          {employee.name}
-          {/* {employee.tag} */}
-        </h2>
+        <h2>{employee.name}</h2>
         <p>{employee.position}</p>
       </div>
 
