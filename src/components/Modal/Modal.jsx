@@ -13,10 +13,13 @@ const Modal = ({ onSelect, onClose }) => {
   return (
     <div className="modal-overlay">
       <div className="modal" onClick={e => e.stopPropagation()}>
-        <button className="modal__close" onClick={onClose}>
-          +
-        </button>
-        <div className="modal__title">Сортировка</div>
+        <div className="conteniner">
+          <div className="modal__title">Сортировка</div>
+          <div className="modal__close" onClick={onClose}>
+            +
+          </div>
+        </div>
+
         <label>
           <input
             type="radio"

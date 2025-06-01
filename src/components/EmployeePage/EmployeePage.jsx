@@ -37,12 +37,12 @@ const EmployeePage = () => {
     <div className="employee-card">
       <div className="employee-card__content">
         <img className="employee-card__avatar" src={employee.avatar} alt={employee.name} />
-        <h2>{employee.name}</h2>
-        <p>{employee.position}</p>
+        <h2 className="employee-card__name">{employee.name}</h2>
+        <h3 className="employee-card__position">{employee.position}</h3>
       </div>
 
       <div className="employee-card__info">
-        <div className="employee-card__info_birth">
+        <div className="employee-card__info_birth info">
           <div className="birth-date">
             <i class="fa-regular fa-star" />
             {new Date(employee.birthDate).toLocaleDateString('ru-RU', {
@@ -51,14 +51,14 @@ const EmployeePage = () => {
               year: 'numeric',
             })}{' '}
           </div>
-          <div className="employee-card__info_age">{age} лет</div>
+          <div className="employee-card__info_age info">{age} лет</div>
         </div>
 
-        <div className="employee-card__info_phone">
+        <div className="employee-card__info_phone info">
           <i class="fa-solid fa-phone" /> {employee.phone}
         </div>
 
-        <div className="employee-card__info_email">
+        <div className="employee-card__info_email info">
           <i class="fa-solid fa-envelope" /> {employee.email}
         </div>
       </div>

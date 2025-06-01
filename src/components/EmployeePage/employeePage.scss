@@ -2,29 +2,44 @@
   display: flex;
   flex-direction: column;
   font-size: 16px;
+  min-height: 100vh;
+  background-color: #fff;
+  margin: 0 auto;
+  text-transform: capitalize;
 
   &__avatar {
     border-radius: 50%;
+    margin: 20px;
+    width: 104px;
+    height: 104px;
+  }
+
+  &__name {
+    margin: 0;
+    padding: 10px;
+    font-size: 24px;
+  }
+
+  &__position {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 300;
   }
 
   &__content {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background-color: rgb(231, 230, 230);
-    padding: 10px 20px;
-    border-radius: 8px;
-    text-align: center;
-    padding-top: 10px;
-    text-transform: capitalize;
+    justify-content: end;
+    min-height: 280px;
+    background-color: #f7f7f8;
+    padding-bottom: 24px;
   }
 
   &__info {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-    padding: 15px;
+    padding: 8px 16px;
 
     &_birth {
       display: flex;
@@ -34,16 +49,18 @@
       margin-top: 20px;
       gap: 8px;
     }
+
     &_age {
       opacity: 60%;
     }
-    &_email {
-      margin-top: 20px;
-    }
-    &_phone {
-      margin-top: 20px;
-    }
   }
+}
+.info {
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  font-weight: 500;
+  margin-bottom: 7px;
 }
 
 .employee-loading {

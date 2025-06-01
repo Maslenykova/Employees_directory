@@ -36,21 +36,24 @@ const EmployeesList = ({ employees, searchQuery, sortType }) => {
     }
     return 0;
   });
-
   return (
     <div className="content">
-      {sortedEmployees.map(employee => (
-        <li className="employees" key={employee.id}>
-          <img className="employees__avatar" src={employee.avatar} alt={employee.name} />
-          <div className="employees__info">
-            <div className="employees__info_name">{employee.name}</div>
-            <div className="employees__info_position">{employee.position}</div>
-          </div>
-          <Link to={`/employee/${employee.id}`} className="employees__tag">
-            {employee.tag}
-          </Link>
-        </li>
-      ))}
+      <ul className="employees-list">
+        {sortedEmployees.map(employee => (
+          <li className="employees" key={employee.id}>
+            <Link to={`/employee/${employee.id}`} className="employees__link">
+              <img className="employees__avatar" src={employee.avatar} alt={employee.name} />
+              <div className="employees__info">
+                <div className="employees__row">
+                  <div className="employees__info_name">{employee.name}</div>
+                  <div className="employees__tag">{employee.tag}</div>
+                </div>
+                <div className="employees__info_position">{employee.position}</div>
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

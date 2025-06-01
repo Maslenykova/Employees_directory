@@ -4,6 +4,7 @@
   width: 100%;
   background-color: rgb(255, 255, 255);
   border-bottom: 1px solid rgb(226, 218, 218);
+  padding: 50px 16px 6px;
 
   &__title {
     margin: 10px;
@@ -17,11 +18,12 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    background-color: rgb(231, 230, 230);
-    border-radius: 20px;
+    border-radius: 16px;
     margin-top: 15px;
-    max-width: 1160px;
-    max-height: 40px;
+    width: 100%;
+    height: 40px;
+    padding: 0 16px 0 8px !important;
+    background-color: rgb(247, 247, 248);
 
     &_input-conteiner {
       margin-left: 15px;
@@ -29,13 +31,16 @@
 
     &_input {
       border: none;
-      background-color: rgb(231, 230, 230);
-      width: 250px;
+      background-color: rgb(247, 247, 248);
+      width: 900px;
       padding-right: 10px;
+      &:focus {
+        outline: none;
+      }
     }
 
     &_btn {
-      background-color: rgb(231, 230, 230);
+      background-color: rgb(247, 247, 248);
       border: none;
       width: 40px;
       height: 40px;
@@ -55,11 +60,14 @@
     &_btn {
       background-color: rgb(255, 255, 255);
       border: none;
-      margin-left: 15px;
-      height: 44px;
+      padding: 8px 12px 9px;
+      height: 36px;
       opacity: 60%;
       font-weight: 500;
-      font-size: 18px;
+      font-size: 15px;
+      text-transform: none;
+      color: #97979b;
+
       &:hover {
         opacity: 100%;
         border-bottom: solid 2px #6534ff;
