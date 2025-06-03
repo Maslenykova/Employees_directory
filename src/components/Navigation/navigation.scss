@@ -4,7 +4,8 @@
   width: 100%;
   background-color: rgb(255, 255, 255);
   border-bottom: 1px solid rgb(226, 218, 218);
-  padding: 50px 16px 6px;
+  padding: 20px 16px 6px;
+  margin-bottom: 10px;
 
   &__title {
     margin: 10px;
@@ -17,12 +18,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: nowrap;
     gap: 8px;
     border-radius: 16px;
     margin-top: 15px;
-    width: 100%;
+    max-width: 100%;
     height: 40px;
-    padding: 0 16px 0 8px !important;
     background-color: rgb(247, 247, 248);
 
     &_input-conteiner {
@@ -47,9 +48,11 @@
       transform: rotate(-90deg);
       padding: 10px;
       border-radius: 50%;
+      cursor: pointer;
 
       &:hover {
         background-color: rgb(232, 219, 219);
+        color: #6534ff;
       }
     }
   }
@@ -67,6 +70,7 @@
       font-size: 15px;
       text-transform: none;
       color: #97979b;
+      cursor: pointer;
 
       &:hover {
         opacity: 100%;

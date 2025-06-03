@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { getEmployeesList } from './components/gateway/employees.actions';
 import Navigation from './components/Navigation/Navigation';
 import EmployeePage from './components/EmployeePage/EmployeePage';
-import EmployeesList from './components/Employees/Employees';
+import EmployeesList from './components/Employees/EmployeesList';
 
 const App = ({ employeesList, getEmployeesList }) => {
   const [searchQuery, setSearchQuery] = useState('');

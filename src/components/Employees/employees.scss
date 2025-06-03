@@ -62,4 +62,27 @@
 .employees-list {
   margin: 0;
   padding: 0;
+
+  &_items {
+    list-style-type: none;
+  }
+  &_year {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 16px;
+    opacity: 0.5;
+    margin: 24px 0;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background-color: #ccc;
+      margin: 0 16px;
+    }
+  }
 }

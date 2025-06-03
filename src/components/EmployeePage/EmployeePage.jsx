@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { fetchEmployeesList } from '../gateway/employeesGateway';
 import './employeePage.scss';
 import Spinner from '../Spinner/Spinner';
@@ -7,6 +7,12 @@ import Spinner from '../Spinner/Spinner';
 const EmployeePage = () => {
   const { id } = useParams();
   const [employee, setEmployee] = useState(null);
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(-1);
+  };
 
   useEffect(() => {
     fetchEmployeesList().then(data => {
@@ -36,6 +42,11 @@ const EmployeePage = () => {
   return (
     <div className="employee-card">
       <div className="employee-card__content">
+        <button className="employee-card__btn" onClick={handleClick}>
+          {' '}
+          <i className="fa-solid fa-arrow-left"></i>
+        </button>
+
         <img className="employee-card__avatar" src={employee.avatar} alt={employee.name} />
         <h2 className="employee-card__name">{employee.name}</h2>
         <h3 className="employee-card__position">{employee.position}</h3>

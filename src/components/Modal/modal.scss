@@ -21,7 +21,6 @@
   background-color: #fff;
 
   &__title {
-    // display: block;
     font-size: 20px;
     text-align: center;
     font-weight: bold;
@@ -54,6 +53,8 @@
   cursor: pointer;
   border-radius: 50%;
   opacity: 0.5;
+  cursor: pointer;
+
   &:hover {
     background-color: rgb(242, 234, 234);
   }

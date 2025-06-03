@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import './modal.scss';
 
-const Modal = ({ onSelect, onClose }) => {
-  const [selectedSort, setSelectedSort] = useState('');
+const Modal = ({ onClose }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentSort = searchParams.get('sortBy') || 'alphabet';
 
   const handleChange = event => {
-    const selectedValue = event.target.value;
-    setSelectedSort(selectedValue);
-    onSelect(selectedValue);
+    const value = event.target.value;
+    searchParams.set('sortBy', value);
+    setSearchParams(searchParams);
   };
 
   return (
@@ -25,7 +27,7 @@ const Modal = ({ onSelect, onClose }) => {
             type="radio"
             name="sort"
             value="alphabet"
-            checked={selectedSort === 'alphabet'}
+            checked={currentSort === 'alphabet'}
             onChange={handleChange}
           />
           По алфавиту
@@ -35,8 +37,8 @@ const Modal = ({ onSelect, onClose }) => {
           <input
             type="radio"
             name="sort"
-            value="birthdate"
-            checked={selectedSort === 'birthdate'}
+            value="birthDate"
+            checked={currentSort === 'birthDate'}
             onChange={handleChange}
           />
           По дню рождения
