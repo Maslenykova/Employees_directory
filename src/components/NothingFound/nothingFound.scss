@@ -1,9 +1,11 @@
 .searchError {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
+  align-items: center;
+  gap: 8px;
+  min-height: 77vh;
+  padding-top: 23px;
 
   &__picture {
     height: 100px;
@@ -11,11 +13,16 @@
   }
 
   &__title {
-    font-size: 20px;
-    padding: 15px;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 22px;
   }
   &__text {
-    font-size: 18px;
-    opacity: 60px;
+    color: #97979b;
+    margin: 4px 0 -5px;
   }
+}
+.ifa-solid .fa-magnifying-glass {
+  width: 100px;
+  height: 100px;
 }

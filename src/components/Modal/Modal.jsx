@@ -4,11 +4,17 @@ import './modal.scss';
 
 const Modal = ({ onClose }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentSort = searchParams.get('sortBy') || 'alphabet';
+  const currentSort = searchParams.get('sortBy');
 
   const handleChange = event => {
     const value = event.target.value;
-    searchParams.set('sortBy', value);
+
+    if (value === 'alphabet') {
+      searchParams.delete('sortBy');
+    } else {
+      searchParams.set('sortBy', value);
+    }
+
     setSearchParams(searchParams);
   };
 
@@ -27,7 +33,7 @@ const Modal = ({ onClose }) => {
             type="radio"
             name="sort"
             value="alphabet"
-            checked={currentSort === 'alphabet'}
+            checked={!currentSort || currentSort === 'alphabet'}
             onChange={handleChange}
           />
           По алфавиту

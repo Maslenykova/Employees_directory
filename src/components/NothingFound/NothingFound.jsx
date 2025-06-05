@@ -4,10 +4,13 @@ import './nothingFound.scss';
 const NothingFound = () => {
   return (
     <div className="searchError">
-      <i className="fa-solid fa-magnifying-glass earchError__picture" />
+      <img
+        src="https://lucky-custard-f827a4.netlify.app/images/magnifying-glass.svg"
+        alt="magnifyng_glass"
+      />
 
-      <div className="searchError__title">We didn't find anyone</div>
-      <div className="searchError__text">Try againe</div>
+      <div className="searchError__title">Мы ничего не нашли</div>
+      <div className="searchError__text">Попробуй скорректировать запрос</div>
     </div>
   );
 };

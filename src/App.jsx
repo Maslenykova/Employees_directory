@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useSearchParams } from 'react-router-dom';
 import { getEmployeesList } from './components/gateway/employees.actions';
 import Navigation from './components/Navigation/Navigation';
 import EmployeePage from './components/EmployeePage/EmployeePage';
@@ -22,6 +22,7 @@ const App = ({ employeesList, getEmployeesList }) => {
           element={
             <div className="main">
               <Navigation onSearch={setSearchQuery} onSortTypeChange={setSortType} />
+
               <EmployeesList
                 employees={employeesList}
                 searchQuery={searchQuery}

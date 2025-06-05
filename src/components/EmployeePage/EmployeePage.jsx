@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchEmployeesList } from '../gateway/employeesGateway';
+import { getEmployeeById } from '../gateway/employees.actions';
 import './employeePage.scss';
 import Spinner from '../Spinner/Spinner';
 
@@ -15,10 +15,7 @@ const EmployeePage = () => {
   };
 
   useEffect(() => {
-    fetchEmployeesList().then(data => {
-      const found = data.find(emp => emp.id === id);
-      setEmployee(found);
-    });
+    getEmployeeById(id).then(data => setEmployee(data));
   }, [id]);
 
   if (!employee)

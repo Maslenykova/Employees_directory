@@ -3,27 +3,34 @@ import { useSearchParams } from 'react-router-dom';
 import Modal from '../Modal/Modal';
 import './navigation.scss';
 
-const Navigation = ({ onSearch, onSortTypeChange }) => {
+const Navigation = ({ onSearch }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [inputValue, setInputValue] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleFilter = position => {
+    const currentSort = searchParams.get('sortBy');
+
     if (position === 'all') {
-      setSearchParams({});
+      searchParams.delete('position');
     } else {
-      setSearchParams({ position });
+      searchParams.set('position', position);
     }
+    searchParams.set('sortBy', currentSort);
+
+    if (currentSort === 'birthDate') {
+      searchParams.set('sortBy', 'birthDate');
+    } else {
+      searchParams.delete('sortBy');
+    }
+
+    setSearchParams(searchParams);
   };
 
   const handleInputChange = event => {
     const newValue = event.target.value;
     setInputValue(newValue);
     onSearch(newValue);
-  };
-
-  const handleSortTypeSelect = sortType => {
-    onSortTypeChange(sortType);
   };
 
   const handleModalClose = () => {
@@ -48,8 +55,7 @@ const Navigation = ({ onSearch, onSortTypeChange }) => {
         <button className="navigation__search_btn" onClick={() => setIsModalOpen(true)}>
           <i className="fa-solid fa-signal" />
         </button>
-
-        {isModalOpen && <Modal onSelect={handleSortTypeSelect} onClose={handleModalClose} />}
+        {isModalOpen && <Modal onClose={handleModalClose} />}
       </div>
 
       <div className="navigation__conteiner">
