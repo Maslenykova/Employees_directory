@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Routes, Route, useSearchParams } from 'react-router-dom';
-import { getEmployeesList } from './components/gateway/employees.actions';
+import { getEmployeesList } from './redux/gateway/employees.actions';
 import Navigation from './components/Navigation/Navigation';
 import EmployeePage from './components/EmployeePage/EmployeePage';
 import EmployeesList from './components/Employees/EmployeesList';

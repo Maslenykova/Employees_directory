@@ -6,14 +6,8 @@ const Modal = ({ onClose }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentSort = searchParams.get('sortBy');
 
-  const handleChange = event => {
-    const value = event.target.value;
-
-    if (value === 'alphabet') {
-      searchParams.delete('sortBy');
-    } else {
-      searchParams.set('sortBy', value);
-    }
+  const handleChange = ({ target: { value } }) => {
+    value === 'alphabet' ? searchParams.delete('sortBy') : searchParams.set('sortBy', value);
 
     setSearchParams(searchParams);
   };

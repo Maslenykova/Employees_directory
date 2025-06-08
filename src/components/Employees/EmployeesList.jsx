@@ -9,29 +9,39 @@ const EmployeesList = ({ employees, searchQuery }) => {
   const positionFilter = searchParams.get('position');
   const sortBy = searchParams.get('sortBy');
 
-  const filteredByPosition = positionFilter
-    ? employees.filter(emp => emp.position.toLowerCase() === positionFilter.toLowerCase())
-    : employees;
+  const getVisibleEmployees = (employees, { position, query, sortBy }) => {
+    const normalizedQuery = query.trim().toLowerCase();
 
-  const normalizedQuery = searchQuery.trim().toLowerCase();
+    return employees
+      .filter(emp => {
+        const matchesPosition = position
+          ? emp.position.toLowerCase() === position.toLowerCase()
+          : true;
+        const matchesQuery = normalizedQuery
+          ? [emp.name, emp.tag, emp.email].some(field =>
+              field.toLowerCase().includes(normalizedQuery),
+            )
+          : true;
+        return matchesPosition && matchesQuery;
+      })
+      .sort((a, b) => {
+        if (sortBy === 'birthDate') {
+          return new Date(a.birthDate) - new Date(b.birthDate);
+        }
+        return a.name.localeCompare(b.name);
+      });
+  };
 
-  const filteredBySearch = normalizedQuery
-    ? filteredByPosition.filter(emp =>
-        [emp.name, emp.tag, emp.email].some(field => field.toLowerCase().includes(normalizedQuery)),
-      )
-    : filteredByPosition;
-
-  if (filteredBySearch.length === 0) return <NothingFound />;
-
-  const sortedEmployees = [...filteredBySearch].sort((a, b) => {
-    if (sortBy === 'birthDate') {
-      return new Date(a.birthDate) - new Date(b.birthDate);
-    }
-    return a.name.localeCompare(b.name);
+  const visibleEmployees = getVisibleEmployees(employees, {
+    position: positionFilter,
+    query: searchQuery,
+    sortBy,
   });
 
+  if (visibleEmployees.length === 0) return <NothingFound />;
+
   if (sortBy === 'birthDate') {
-    const groupedByYear = sortedEmployees.reduce((acc, employee) => {
+    const groupedByYear = visibleEmployees.reduce((acc, employee) => {
       const year = new Date(employee.birthDate).getFullYear();
       if (!acc[year]) acc[year] = [];
       acc[year].push(employee);
@@ -68,7 +78,7 @@ const EmployeesList = ({ employees, searchQuery }) => {
   return (
     <div className="content">
       <ul className="employees-list">
-        {sortedEmployees.map(employee => (
+        {visibleEmployees.map(employee => (
           <li className="employees-list_items" key={employee.id}>
             <Link to={`/employee/${employee.id}`} className="employees__link">
               <img className="employees__avatar" src={employee.avatar} alt={employee.name} />

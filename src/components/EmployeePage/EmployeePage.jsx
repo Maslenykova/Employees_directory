@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getEmployeeById } from '../gateway/employees.actions';
+import moment from 'moment';
+import { getEmployeeById } from '../../redux/gateway/employees.actions';
 import './employeePage.scss';
 import Spinner from '../Spinner/Spinner';
 
@@ -9,10 +10,6 @@ const EmployeePage = () => {
   const [employee, setEmployee] = useState(null);
 
   const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate(-1);
-  };
 
   useEffect(() => {
     getEmployeeById(id).then(data => setEmployee(data));
@@ -33,15 +30,15 @@ const EmployeePage = () => {
   let age = today.getFullYear() - dob.getFullYear();
 
   if (today < dobnow) {
-    age = age - 1;
+    age -= 1;
   }
 
   return (
     <div className="employee-card">
       <div className="employee-card__content">
-        <button className="employee-card__btn" onClick={handleClick}>
+        <button className="employee-card__btn" onClick={() => navigate(-1)}>
           {' '}
-          <i className="fa-solid fa-arrow-left"></i>
+          <i className="fa-solid fa-arrow-left" />
         </button>
 
         <img className="employee-card__avatar" src={employee.avatar} alt={employee.name} />
@@ -53,11 +50,7 @@ const EmployeePage = () => {
         <div className="employee-card__info_birth info">
           <div className="birth-date">
             <i class="fa-regular fa-star" />
-            {new Date(employee.birthDate).toLocaleDateString('ru-RU', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric',
-            })}{' '}
+            {moment(employee.birthDate).format('D MMMM YYYY')}
           </div>
           <div className="employee-card__info_age info">{age} лет</div>
         </div>

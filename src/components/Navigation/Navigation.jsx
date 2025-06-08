@@ -9,19 +9,10 @@ const Navigation = ({ onSearch }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleFilter = position => {
-    const currentSort = searchParams.get('sortBy');
-
     if (position === 'all') {
       searchParams.delete('position');
     } else {
       searchParams.set('position', position);
-    }
-    searchParams.set('sortBy', currentSort);
-
-    if (currentSort === 'birthDate') {
-      searchParams.set('sortBy', 'birthDate');
-    } else {
-      searchParams.delete('sortBy');
     }
 
     setSearchParams(searchParams);
@@ -33,9 +24,14 @@ const Navigation = ({ onSearch }) => {
     onSearch(newValue);
   };
 
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
+  const filterOptions = [
+    { label: 'Все', value: 'all' },
+    { label: 'Designers', value: 'designer' },
+    { label: 'Analysts', value: 'analyst' },
+    { label: 'Managers', value: 'manager' },
+    { label: 'IOS', value: 'ios' },
+    { label: 'Android', value: 'android' },
+  ];
 
   return (
     <div className="navigation">
@@ -55,29 +51,19 @@ const Navigation = ({ onSearch }) => {
         <button className="navigation__search_btn" onClick={() => setIsModalOpen(true)}>
           <i className="fa-solid fa-signal" />
         </button>
-        {isModalOpen && <Modal onClose={handleModalClose} />}
+        {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} />}
       </div>
 
       <div className="navigation__conteiner">
-        <button className="navigation__conteiner_btn" onClick={() => handleFilter('all')}>
-          Все
-        </button>
-
-        <button className="navigation__conteiner_btn" onClick={() => handleFilter('designer')}>
-          Designers
-        </button>
-        <button className="navigation__conteiner_btn" onClick={() => handleFilter('analyst')}>
-          Analysts
-        </button>
-        <button className="navigation__conteiner_btn" onClick={() => handleFilter('manager')}>
-          Managers
-        </button>
-        <button className="navigation__conteiner_btn" onClick={() => handleFilter('ios')}>
-          IOS
-        </button>
-        <button className="navigation__conteiner_btn" onClick={() => handleFilter('android')}>
-          Android
-        </button>
+        {filterOptions.map(({ label, value }) => (
+          <button
+            key={value}
+            className="navigation__conteiner_btn"
+            onClick={() => handleFilter(value)}
+          >
+            {label}
+          </button>
+        ))}
       </div>
     </div>
   );
