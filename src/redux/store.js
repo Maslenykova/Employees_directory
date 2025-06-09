@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { thunk } from 'redux-thunk';
-import employeesReducer from './gateway/employees.reducer';
+// import employeesReducer from './employees.reducer';
+import employeesReducer from './employees.reducer';
 
 const reducer = combineReducers({
   employeesList: employeesReducer,
