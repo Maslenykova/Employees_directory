@@ -9,7 +9,7 @@ const EmployeesList = ({ employees, searchQuery }) => {
   const positionFilter = searchParams.get('position');
   const sortBy = searchParams.get('sortBy');
 
-  const getVisibleEmployees = (employees, { position, query, sortBy }) => {
+  const getSortEmployeesList = (employees, { position, query, sortBy }) => {
     const normalizedQuery = query.trim().toLowerCase();
 
     return employees
@@ -32,11 +32,24 @@ const EmployeesList = ({ employees, searchQuery }) => {
       });
   };
 
-  const visibleEmployees = getVisibleEmployees(employees, {
+  const visibleEmployees = getSortEmployeesList(employees, {
     position: positionFilter,
     query: searchQuery,
     sortBy,
   });
+
+  const renderEmployee = employee => (
+    <Link to={`/employee/${employee.id}`} key={employee.id} className="employees__link">
+      <img className="employees__avatar" src={employee.avatar} alt={employee.name} />
+      <div className="employees__info">
+        <div className="employees__row">
+          <div className="employees__info_name">{employee.name}</div>
+          <div className="employees__tag">{employee.tag}</div>
+        </div>
+        <div className="employees__info_position">{employee.position}</div>
+      </div>
+    </Link>
+  );
 
   if (visibleEmployees.length === 0) return <NothingFound />;
 
@@ -56,18 +69,7 @@ const EmployeesList = ({ employees, searchQuery }) => {
           {sortedYears.map(year => (
             <li className="employees-list_items" key={year}>
               <h2 className="employees-list_year">{year}</h2>
-              {groupedByYear[year].map(employee => (
-                <Link to={`/employee/${employee.id}`} key={employee.id} className="employees__link">
-                  <img className="employees__avatar" src={employee.avatar} alt={employee.name} />
-                  <div className="employees__info">
-                    <div className="employees__row">
-                      <div className="employees__info_name">{employee.name}</div>
-                      <div className="employees__tag">{employee.tag}</div>
-                    </div>
-                    <div className="employees__info_position">{employee.position}</div>
-                  </div>
-                </Link>
-              ))}
+              {groupedByYear[year].map(employee => renderEmployee(employee))}
             </li>
           ))}
         </ul>
@@ -80,16 +82,7 @@ const EmployeesList = ({ employees, searchQuery }) => {
       <ul className="employees-list">
         {visibleEmployees.map(employee => (
           <li className="employees-list_items" key={employee.id}>
-            <Link to={`/employee/${employee.id}`} className="employees__link">
-              <img className="employees__avatar" src={employee.avatar} alt={employee.name} />
-              <div className="employees__info">
-                <div className="employees__row">
-                  <div className="employees__info_name">{employee.name}</div>
-                  <div className="employees__tag">{employee.tag}</div>
-                </div>
-                <div className="employees__info_position">{employee.position}</div>
-              </div>
-            </Link>
+            {renderEmployee(employee)}
           </li>
         ))}
       </ul>

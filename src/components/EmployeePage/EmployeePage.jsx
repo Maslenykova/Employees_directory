@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import moment from 'moment';
-// import { getEmployeeById } from '../../redux/employees.actions';
-import { getEmployeeById } from '../../redux/employees.actions';
+import { getEmployeeById } from '../../gateways/index';
 import './employeePage.scss';
 import Spinner from '../Spinner/Spinner';
 

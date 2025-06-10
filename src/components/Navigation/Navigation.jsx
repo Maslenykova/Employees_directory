@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Modal from '../Modal/Modal';
 import './navigation.scss';
@@ -7,6 +7,17 @@ const Navigation = ({ onSearch }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [inputValue, setInputValue] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const searchTextFromParams = searchParams.get('searchText') || '';
+    setInputValue(searchTextFromParams);
+  }, [searchParams]);
+
+  const handleInputChange = value => {
+    const params = new URLSearchParams(searchParams);
+    value ? params.set('searchText', value) : params.delete('searchText');
+    setSearchParams(params);
+  };
 
   const handleFilter = position => {
     if (position === 'all') {
@@ -18,13 +29,7 @@ const Navigation = ({ onSearch }) => {
     setSearchParams(searchParams);
   };
 
-  const handleInputChange = event => {
-    const newValue = event.target.value;
-    setInputValue(newValue);
-    onSearch(newValue);
-  };
-
-  const filterOptions = [
+  const tabsConfig = [
     { label: 'Все', value: 'all' },
     { label: 'Designers', value: 'designer' },
     { label: 'Analysts', value: 'analyst' },
@@ -44,7 +49,12 @@ const Navigation = ({ onSearch }) => {
             placeholder="Search by name, tag or email"
             className="navigation__search_input"
             value={inputValue}
-            onChange={handleInputChange}
+            onChange={e => {
+              const value = e.target.value;
+              setInputValue(value);
+              handleInputChange(value);
+              onSearch(value);
+            }}
           />
         </div>
 
@@ -55,7 +65,7 @@ const Navigation = ({ onSearch }) => {
       </div>
 
       <div className="navigation__conteiner">
-        {filterOptions.map(({ label, value }) => (
+        {tabsConfig.map(({ label, value }) => (
           <button
             key={value}
             className="navigation__conteiner_btn"
