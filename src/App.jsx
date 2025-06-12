@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Routes, Route, useSearchParams } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { getEmployeesList } from './redux/employees.actions';
-import Navigation from './components/Navigation/Navigation';
-import EmployeePage from './components/EmployeePage/EmployeePage';
-import EmployeesList from './components/Employees/EmployeesList';
+import Navigation from './components/Navigation/index';
+import EmployeePage from './components/EmployeePage/index';
+import EmployeesList from './components/EmployeesList/index';
 
 const App = ({ employeesList, getEmployeesList }) => {
   const [searchQuery, setSearchQuery] = useState('');

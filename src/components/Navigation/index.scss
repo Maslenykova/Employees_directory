@@ -72,9 +72,10 @@
       color: #97979b;
       cursor: pointer;
 
-      &:hover {
+      &.active {
         opacity: 100%;
         border-bottom: solid 2px #6534ff;
+        color: black;
       }
     }
   }

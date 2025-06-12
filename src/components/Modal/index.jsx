@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import './modal.scss';
+import PropTypes from 'prop-types';
+import './index.scss';
 
 const Modal = ({ onClose }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -46,6 +47,10 @@ const Modal = ({ onClose }) => {
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  onClose: PropTypes.func.isRequired,
 };
 
 export default Modal;

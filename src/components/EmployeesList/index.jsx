@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import './employees.scss';
-import NothingFound from '../NothingFound/NothingFound';
+import PropTypes from 'prop-types';
+import './index.scss';
+import NothingFound from '../NothingFound/index';
 
 const EmployeesList = ({ employees, searchQuery }) => {
   const [searchParams] = useSearchParams();
@@ -88,6 +89,11 @@ const EmployeesList = ({ employees, searchQuery }) => {
       </ul>
     </div>
   );
+};
+
+EmployeesList.propTypes = {
+  employees: PropTypes.array.isRequired,
+  searchQuery: PropTypes.string.isRequired,
 };
 
 export default EmployeesList;

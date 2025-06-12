@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './spinner.scss';
+import './index.scss';
 
 const Spinner = () => {
   return <span className="spinner" />;

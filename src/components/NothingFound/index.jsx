@@ -1,5 +1,5 @@
 import React from 'react';
-import './nothingFound.scss';
+import './index.scss';
 
 const NothingFound = () => (
   <div className="searchError">

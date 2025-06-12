@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import Modal from '../Modal/Modal';
-import './navigation.scss';
+import PropTypes from 'prop-types';
+import Modal from '../Modal/index';
+import './index.scss';
 
 const Navigation = ({ onSearch }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -38,6 +39,8 @@ const Navigation = ({ onSearch }) => {
     { label: 'Android', value: 'android' },
   ];
 
+  const activeTab = searchParams.get('position') || 'all';
+
   return (
     <div className="navigation">
       <span className="navigation__title">Поиск</span>
@@ -68,7 +71,7 @@ const Navigation = ({ onSearch }) => {
         {tabsConfig.map(({ label, value }) => (
           <button
             key={value}
-            className="navigation__conteiner_btn"
+            className={`navigation__conteiner_btn ${activeTab === value ? 'active' : ''}`}
             onClick={() => handleFilter(value)}
           >
             {label}
@@ -77,6 +80,10 @@ const Navigation = ({ onSearch }) => {
       </div>
     </div>
   );
+};
+
+Navigation.propTypes = {
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default Navigation;
